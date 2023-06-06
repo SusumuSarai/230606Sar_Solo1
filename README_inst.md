@@ -3,6 +3,7 @@
 First solo project!
 [素敵な Readme の書き方](https://qiita.com/koeri3/items/f85a617dcb6efebb2cab)
 [基本的な書き方とフォーマットの構文＠Git](https://docs.github.com/ja/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
+[Awesome README](https://github.com/matiassingers/awesome-readme)
 
 # 環境設定
 
@@ -53,7 +54,8 @@ README ファイル作成の場合は「Initialize this repository with a README
 ・リモートリポジトリ（更新 1 作業が終わったらそのブランチ）にプッシュ（アップ）する
 `git push origin workbranch1`
 
-※※以下 Git merge 関係は作成中・未確認
+### ※※以下 Git merge 関係は作成中・未確認
+
 以下 Git にて
 同時に作っていたファイルを合体するには、
 co-worker がローカルの作業 branch にて \*\*\* を `pull` して `merge` 、コンフリクトを解消する
@@ -86,6 +88,7 @@ OK なら `merge` して branch を `delete` する
 
 ### React インストール
 
+[Start a New React Project](https://react.dev/learn/start-a-new-react-project)
 [React アプリに Node.js サーバープロキシを設定する方法](https://www.twilio.com/ja/blog/react-app-with-node-js-server-proxy-jp)
 ※事前に Node.js と npm をインストールしておくこと
 
@@ -101,6 +104,9 @@ OK なら `merge` して branch を `delete` する
 
 ### サーバーの追加
 
+[Express - install](https://expressjs.com/ja/starter/installing.html)
+[sprint.express-http](https://github.com/codechrysalis/dig-imr-4-sprint.express-http)
+
 Cmd/Ctrl + C でサーバーを停止し、npm を使用して Express をインストール
 `npm install express --save-dev`
 
@@ -112,6 +118,9 @@ Cmd/Ctrl + C でサーバーを停止し、npm を使用して Express を
 `npm install node-env-run nodemon npm-run-all express-pino-logger pino-colada --save-dev`
 
 ・.env ファイルをプロジェクトディレクトリに作成(現時点記載なし)
+・プロジェクトのディレクトリに .gitignore という名前のファイルを作成
+.gitignore 中の最初の行に node_modules を追加
+git status を実行して、 node_modules ディレクトリが無視されていることを確認
 
 ・プロジェクトディレクトリに、server という新しいディレクトリと server/index.js ファイルを作成
 以下のテスト用コードを記載
@@ -132,44 +141,102 @@ app.get('/api/greeting', (req, res) => {
 app.listen(3001, () => console.log('Express server is running on localhost:3001') );
 ```
 
+以降はまだ記載（転記）していません。HP 参照のこと
 
-### Package.json 作成
+## typescript のインストール
 
-ターミナル
-`npm init`
+[TypeScript チュートリアル -環境構築編-](https://qiita.com/ochiochi/items/efdaa0ae7d8c972c8103)
+Terminal で
+`npm install -g typescript`
 
-##　バックエンド
+```
+npm ERR! If you believe this might be a permissions issue, please double-check the
+npm ERR! permissions of the file and its containing directories, or try running
+npm ERR! the command again as root/Administrator.
+```
 
-### Express のインストール　
+※上記の Error が出た場合は、管理者権限でインストール
+`sudo npm install -g typescript`
+この後の「Password:」は macOS アカウントのパスワードを入力
 
-ターミナル
-`npm install express`
-server.js を作成
-[sprint.express-http](https://github.com/codechrysalis/dig-imr-4-sprint.express-http)
+※※Git リポジトリでセキュリティ強化したかも〜merge 必要などのとセット？
 
-### nodemon をインストール
+`tsc -v` でバージョン表示（Version 5.1.3 など）されればインストール完了
 
-ターミナル
-`npm install --save-dev nodemon`
+## knex のインストール
 
-### knex のインストール
+[Knex.js - Installation](https://knexjs.org/guide/#node-js)
+[](https://zenn.dev/wkb/books/node-tutorial/viewer/todo_06)
+・knex.js モジュールをインストール
+`npm install knex`
+・knex.js の接続設定ファイルを作成
+`npx knex init`
+・knexfile.js というファイルの設定（下記）を実施
+また本ファイル knexfile.js を ./db（新規作成） に移動し、以下の構成フォルダを作成
+(./db/data/migrations, および seeds)
 
-## フロントエンド
+```
+require("dotenv").config({
+  path: "../.env",
+});
+/**
+ * @type { Object.<string, import("knex").Knex.Config> }
+ */
 
-### react のインストール ~ パターン１　
+module.exports = {
+  development: {
+    client: "pg",
+    connection: {
+      user: process.env.DB_USER || "user",
+      database: process.env.DB_NAME || "remainder",
+    },
+    migrations: {
+      directory: "./data/migrations",
+    },
+    seeds: { directory: "./data/seeds" },
+  },
+  production: {
+    client: "pg",
+    connection: process.env.DATABASE_URL,
+    migrations: {
+      directory: "./data/migrations",
+    },
+    seeds: { directory: "./data/seeds" },
+  },
+};
+```
 
-npx create-react-app sampleapp※ ※プロジェクト名(小文字)
-cd sampleapp
-npm start
+・同フォルダ（ ./db）にファイル 「knex.js」 を新規作成し、以下を記載
 
-### react のインストール ~ パターン２　 npm 依存パッケージをインストール
+```
+const knex = require("knex");
+const knexConfig = require("./knexfile");
+const environment = process.env.DATABASE_URL ? "production" : "development";
 
-Package.json に以下記載の上 ターミナルで`npm install`
-`  "dependencies": {`
-`    "react": "^18.2.0",`
-`    "react-dom": "^18.2.0",`
-`    "react-scripts": "^5.0.1"`
+module.exports = knex(knexConfig[environment]);
+```
 
-### Typescript
+・次に ./server/index.js から knex.js を読み込み
+knex.js モジュールと設定が格納されている定数 knex を読み込み
+`const knex = require('../db/knex');`
 
-npm install typescript --save-dev
+## PostgreSQL のインストール
+
+Relational DATABASE (SQL: Structured Query Language) をインストールする
+`npm install pg`
+package.json の "scripts" に以下の "migrate, seed" スクリプトを追加、
+"build" スクリプトを変更
+
+```
+"scripts": {
+  "migrate-make": "npx knex migrate:make --knexfile db/knexfile.js",
+  "migrate-latest": "npx knex migrate:latest --knexfile db/knexfile.js",
+  "migrate-down": "npx knex migrate:down --knexfile db/knexfile.js",
+  "migrate-back": "npx knex migrate:rollback --knexfile db/knexfile.js",
+  "seed-make": "npx knex seed:make --knexfile db/knexfile.js",
+  "seed-data": "npx knex seed:run --knexfile db/knexfile.js",
+  "build": "npm install && npm run migrate-back && npm run migrate-latest && npm run seed-data && react-scripts build"
+}
+```
+
+⭐️ 最後に DB を作って動作するか（ディレクトリ含めて）確認すること！

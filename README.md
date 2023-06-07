@@ -5,7 +5,43 @@ First solo project!
 [基本的な書き方とフォーマットの構文＠Git](https://docs.github.com/ja/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 [Awesome README](https://github.com/matiassingers/awesome-readme)
 
-# 環境設定
+- [1.about_Application](#1.about_Application)
+- [2.Setup](#2.Setup)
+- [3.Getting_Started_with_CreateReactApp](#3.Getting_Started_withCreateReactApp)
+
+# 1.about_Application
+
+## 概要と目標：
+
+妻のピアノ発表会のプログラムを HP で案内する
+
+・目標：以下のフルスタック Web Application の MVP を 限定公開する（〜６/９金）
+　 Must : ピアノ発表会’2022 のプログラムを（DB から取得し）見られる
+　 better:ピアノ発表会’2023 の曲目を登録できる
+　　 毎年の内容が振り返れるよう DATABESE "piano" に情報を溜める
+
+・使用技術
+Front : React + TypeScript
+Server : Express
+Database : Postges / Knex
+Deploy : ?（ render or rental server）
+Test : ?
+
+・Min 基準
+　 1. データベース、サーバーとフロントが繋がっていて、機能している
+　 2. データベースのスキーマがあるか（Migration file）
+　 3. API のエンドポイントがあるか (HTTP メソッド get/post)
+　 4. React を使用したフロントサイド実装（useEffect/useState）
+
+・Better 基準
+　 5. package.json 内にスクリプト（scripts）が書かれている
+　 6. README が書かれている（セットアップ、アプリの内容、および将来の計画）
+　 7. デプロイされているか
+　 8. テストがあるか
+
+## アプリの内容
+
+# 2.Setup
 
 ## Git 操作
 
@@ -243,7 +279,7 @@ package.json の "scripts" に以下の "migrate, seed" スクリプトを追加
 
 **_以下は React の Readme を転記_**
 
-# Getting Started with Create React App
+# 3.Getting_Started_withCreateReactApp
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

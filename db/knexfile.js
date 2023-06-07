@@ -12,7 +12,7 @@ module.exports = {
     client: "pg",
     connection: {
       user: process.env.DB_USER || "user",
-      database: process.env.DB_NAME || "remainder",
+      database: process.env.DB_NAME || "piano",
     },
     migrations: {
       directory: "./data/migrations",

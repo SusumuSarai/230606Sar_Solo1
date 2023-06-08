@@ -181,6 +181,7 @@ app.listen(3001, () => console.log('Express server is running on localhost:3001'
 
 ## typescript のインストール
 
+※インストールしたものの、今回の開発では時間の関係上不使用※
 [TypeScript チュートリアル -環境構築編-](https://qiita.com/ochiochi/items/efdaa0ae7d8c972c8103)
 Terminal で
 `npm install -g typescript`
@@ -276,6 +277,52 @@ package.json の "scripts" に以下の "migrate, seed" スクリプトを追加
 ```
 
 ⭐️ 最後に DB を作って動作するか（ディレクトリ含めて）確認すること！
+
+## render 　の設定
+
+[render.com](https://render.com/)
+[dig-imr-4-sprint.fullstack-deployment-dig](https://github.com/codechrysalis/dig-imr-4-sprint.fullstack-deployment-dig)
+
+### Render のアカウント取得
+
+render.com にアクセスし、最新の説明に従ってアカウントを設定してください。この際、有料プランにサインアップする必要はありません。
+
+Github のアカウントと接続し、リポジトリへのアクセスを許可してください。
+新しい Web サービスを作成します。
+
+Render dashboard にアクセスします。
+
+"New" ボタンをクリックします。
+
+"Web Service" を選択します。
+
+Github のリポジトリに接続し、リストからこのリポジトリを選択します。
+
+このリポジトリが選択肢にない場合は、Github のリポジトリにアクセスする権限を Render に付与するようにアカウントを設定してください。
+"Name" は他で使っていない名前を入力します。
+
+ルートディレクトリは空のままにします。（デフォルトでこのプロジェクトのルートになります。）
+
+"Environment" は "Node" を選択します。
+
+"Region" は、あなたがいる場所に最も近いものを選択します。
+"Branch" には、master を入力します。
+" Build Command" は npm run build を入力します。
+
+### "Start Command"
+
+"Start Command" はサーバーを起動するスクリプトを記載
+`npm run server-render`
+package.json の scripts に以下追記
+（今回のデフォルトサーバー起動コマンドは開発環境向けだったため
+"server": "node-env-run server --exec nodemon",であった）
+` "server-render": "node ./server/index.js",`
+
+```
+Start Command
+This command runs in the root directory of your app and is responsible for starting its processes. It is typically used to start a webserver for your app. It can access environment variables defined by you in Render.
+(このコマンドは、アプリのルート・ディレクトリで実行され、アプリのプロセスを開始する役割を果たします。通常、アプリのウェブサーバーを起動するために使用されます。Renderで定義した環境変数にアクセスすることができます。)
+```
 
 **_以下は React の Readme を転記_**
 

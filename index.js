@@ -1,6 +1,6 @@
 const express = require("express");
 const pino = require("express-pino-logger")();
-const knex = require("../db/knex");
+const knex = require("./db/knex");
 const app = express();
 // const knex = require("../db/knex");
 const PORT = process.env.PORT || 8080;

@@ -290,7 +290,7 @@ render.com にアクセスし、最新の説明に従ってアカウントを設
 Github のアカウントと接続し、リポジトリへのアクセスを許可してください。
 新しい Web サービスを作成します。
 
-Render dashboard にアクセスします。
+[Render dashboard](https://dashboard.render.com/) にアクセスします。
 
 "New" ボタンをクリックします。
 

@@ -1,6 +1,6 @@
 // import logo from "./logo.svg";
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { HomeInfo } from "./components/HomeInfo";
@@ -16,6 +16,50 @@ export const App = () => {
   ]);
   const [playList, setPlayList] = useState([]);
   console.log("contentFlag App1 :", contentFlag);
+
+  // // const fetchplaylist = useEffect(() => {
+  //fetchで読み込むその1 〜 "async, await"方式
+  // useEffect(() => {
+  //   console.log("fetch");
+  //   const getdata = async () => {
+  //     const fetchData = await fetch("http://localhost:8080/list");
+  //     const jsonData = await fetchData.json();
+  //     // .then((res) => res.json())
+  //     // .then((data) => {
+  //     console.log(jsonData);
+  //   };
+  //   getdata();
+  // }, []);
+
+  // //fetchで読み込むその２ 〜 ".then"方式
+  // useEffect(() => {
+  //   console.log("fetch");
+  //   const getdata = () => {
+  //     const fetchData = fetch("http://localhost:8080/list")
+  //       .then((e) => e.json())
+  //       .then((data) => {
+  //         console.log(data);
+  //       });
+  //   };
+  //   getdata();
+  // }, []);
+
+  //fetchで読み込むその3 〜 ".then"方式をリファクタ
+  useEffect(() => {
+    fetch("http://localhost:8080/list")
+      .then((e) => e.json())
+      .then((data) => {
+        console.log("fetch_data:", data);
+        setPlayList(data);
+      });
+  }, []);
+  console.log("playList:", playList);
+
+  // const handleClick = async () => {
+  //   const fetchData = await fetch("http://localhost:8000/test");
+  //   const jsonData = await fetchData.json();
+  //   setValue([...value, jsonData]);
+  // };
 
   // const handleChange = (e) => {
   //   (e.target.value);
@@ -45,6 +89,7 @@ export const App = () => {
             className="appMain2PlayList"
             playList={playList}
             setPlayList={setPlayList}
+            // onClick={fetchplaylist}
           />
         )}
       </main>

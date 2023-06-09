@@ -7,13 +7,30 @@ First solo project!
 
 - [1.about_Application](#1.about_Application)
 - [2.Setup](#2.Setup)
-- [3.Getting_Started_with_CreateReactApp](#3.Getting_Started_withCreateReactApp)
+- [3.Render setting](#3.Render_setting)
+- [4.Getting_Started_with_CreateReactApp](#4.Getting_Started_withCreateReactApp)
 
 # 1.about_Application
 
-## 概要と目標：
+ピアノ発表会のプログラムを HP で案内する
 
-妻のピアノ発表会のプログラムを HP で案内する
+## アプリの構想
+
+❤️ 素敵な　〜見たくなる・遊べる〜　ピアノ教室の HP を提供する　 ❤️
+　・お知らせごとを共有できる　〜お知らせ欄　
+　・ピアノ発表会のプログラムを見ることができる　〜プログラム欄
+　・音楽への興味が深まる情報に触れられる　〜API との接続（曲／作曲家情報等）
+　・幼児向け〜楽しい音を使ったお遊びができる　〜（構想中〜音符カード？）
+　・過去の楽曲を調べることができる　〜データベース機能
+　・生徒と先生のやりとりができる　　〜入力フォーム＆ID 登録
+
+❤️ 機能　（直感的に使えること）
+→【MVP】ピアノ発表会のプログラムを DB に溜めて、Web 上で見ることができる。
+【Release2】　"Open Opus API" と繋げて、作曲家情報・画像を提供
+【Release3】　プログラムの更新、問合せフォーム機能を追加
+【Release4】　 css でデザイン性を高める
+
+## 直近の目標
 
 ・目標：以下のフルスタック Web Application の MVP を 限定公開する（〜６/９金）
 　 Must : ピアノ発表会’2022 のプログラムを（DB から取得し）見られる
@@ -24,22 +41,18 @@ First solo project!
 Front : React + TypeScript
 Server : Express
 Database : Postges / Knex
-Deploy : ?（ render or rental server）
-Test : ?
+Deploy : Render.com
+Test : (not yet)
 
-・Min 基準
-　 1. データベース、サーバーとフロントが繋がっていて、機能している
-　 2. データベースのスキーマがあるか（Migration file）
-　 3. API のエンドポイントがあるか (HTTP メソッド get/post)
-　 4. React を使用したフロントサイド実装（useEffect/useState）
-
-・Better 基準
-　 5. package.json 内にスクリプト（scripts）が書かれている
-　 6. README が書かれている（セットアップ、アプリの内容、および将来の計画）
-　 7. デプロイされているか
-　 8. テストがあるか
-
-## アプリの内容
+・評価基準
+⭕️ 1. データベース、サーバーとフロントが繋がっていて、機能している
+⭕️ 2. データベースのスキーマがあるか（Migration file）
+⭕️ 3. API のエンドポイントがあるか (HTTP メソッド get)
+⭕️ 4. React を使用したフロントサイド実装（useEffect/useState）
+⭕️ 5. package.json 内にスクリプト（scripts）が書かれている
+❌ 6. テストがあるか
+⭕️ 7. README が書かれている（セットアップ、アプリの内容、および将来の計画）
+⭕️ 8. デプロイされているか
 
 # 2.Setup
 
@@ -278,55 +291,103 @@ package.json の "scripts" に以下の "migrate, seed" スクリプトを追加
 
 ⭐️ 最後に DB を作って動作するか（ディレクトリ含めて）確認すること！
 
-## render 　の設定
+# 3.Render_setting
 
 [render.com](https://render.com/)
 [dig-imr-4-sprint.fullstack-deployment-dig](https://github.com/codechrysalis/dig-imr-4-sprint.fullstack-deployment-dig)
 
 ### Render のアカウント取得
 
-render.com にアクセスし、最新の説明に従ってアカウントを設定してください。この際、有料プランにサインアップする必要はありません。
+render.com にアクセスし、最新の説明に従ってアカウントを設定
+（有料プランにサインアップする必要なし）
 
-Github のアカウントと接続し、リポジトリへのアクセスを許可してください。
-新しい Web サービスを作成します。
+Github のアカウントと接続し、リポジトリへのアクセスを許可、
+「新しい Web サービス」を作成
 
-Render dashboard にアクセスします。
+### Web Service の作成　（Node サーバーの設定）
 
-"New" ボタンをクリックします。
+[Render dashboard](https://dashboard.render.com/) にアクセス
 
-"Web Service" を選択します。
+"New" ボタンをクリック
+"Web Service" を選択
 
-Github のリポジトリに接続し、リストからこのリポジトリを選択します。
-
-このリポジトリが選択肢にない場合は、Github のリポジトリにアクセスする権限を Render に付与するようにアカウントを設定してください。
-"Name" は他で使っていない名前を入力します。
-
-ルートディレクトリは空のままにします。（デフォルトでこのプロジェクトのルートになります。）
-
-"Environment" は "Node" を選択します。
-
-"Region" は、あなたがいる場所に最も近いものを選択します。
-"Branch" には、master を入力します。
-" Build Command" は npm run build を入力します。
-
-### "Start Command"
-
-"Start Command" はサーバーを起動するスクリプトを記載
-`npm run server-render`
-package.json の scripts に以下追記
-（今回のデフォルトサーバー起動コマンドは開発環境向けだったため
-"server": "node-env-run server --exec nodemon",であった）
-` "server-render": "node ./server/index.js",`
+Github のリポジトリに接続し、リストからこのリポジトリを選択。
+（このリポジトリが選択肢にない場合は、Github のリポジトリにアクセスする権限を Render に付与するようにアカウントを設定）
+・Name ：他で使っていない名前を入力
+・Region ：あなたがいる場所に最も近いものを選択
+・Branch ：master など対象の Branch 名 を入力
+・Root Directory：　空のまま（デフォルトでこのプロジェクトのルートになる）
+・Environment ：　"Node" を選択
+・Build Command ：`npm run build` を入力
+　※package.json の scripts に下記追加（npm i から react build まで）
+　```
+"build": "npm install && npm run migrate-back && npm run migrate-latest && npm run seed-data && react-scripts build",
 
 ```
+⭐️Start Command : サーバーを起動するスクリプトを記載
+`npm run server-render`
+　※package.json の scripts に以下追記
+  `"server-render": "node ./server/index.js",`
+  （今回デフォルトのサーバー起動コマンド`npm run server`は開発環境向けの scrypt
+  `"server": "node-env-run server --exec nodemon"` のため）
+【注意１】
+　"server/index.js" に以下追記し、Express で静的ファイル（.js, .css などを "react/webpack" でbuildしたもの）を使えるようにしておくこと
+ *`app.use(express.static("build"));`　を追記*
+【注意２】src/App.js のサーバーとのやり取りのエンドポイントを変更
+　新：fetch("/list")　※公開環境用
+　旧：fetch("http://localhost:8080/list")　※開発環境用
+　
+※以下render入力部説明を参考引用
+```
+
 Start Command
 This command runs in the root directory of your app and is responsible for starting its processes. It is typically used to start a webserver for your app. It can access environment variables defined by you in Render.
-(このコマンドは、アプリのルート・ディレクトリで実行され、アプリのプロセスを開始する役割を果たします。通常、アプリのウェブサーバーを起動するために使用されます。Renderで定義した環境変数にアクセスすることができます。)
+(このコマンドは、アプリのルート・ディレクトリで実行され、アプリのプロセスを開始する役割を果たします。通常、アプリのウェブサーバーを起動するために使用されます。Render で定義した環境変数にアクセスすることができます。)
+
 ```
+・"Free"プランが選択されていることを確認（有効期限は90日間）
+
+"Create Web Service" ボタンをクリックします。
+
+### Database の設定
+・ダッシュボードで "New" をクリック、今回は "PostgreSQL" を選択
+・一意の名前を付ける（例：pianoPostgres）
+・データベースフィールドに piano と入力します。
+・"User" フィールドに覚えやすいユーザー名を入力
+・"Region" フィールドには、最も近いリージョンを選択
+・"PostgreSQL version" を 14 に設定
+ （他の設定はひとまず無視）
+・"Free" プランが選択されていることを確認
+
+ "Create Database" ボタンをクリック
+ ダッシュボードに戻り、データベースのステータスが "Available" に変わるのを待つ
+
+### Render Web サービスに　Database を接続する設定
+環境変数 "Environment Variables" を追加
+・ダッシュボードから、作成した PostgreSQL データベースをクリック
+・"Info" タブの "Connections" セクションから、"Internal Database URL" をコピー
+・Render のダッシュボードに戻り、作成した Node の Web サービスをクリック
+・"Environment" タブをクリック
+　・"Add Environment Variable" をクリック
+　　・"Key"に "DATABASE_URL" を入力
+　　・"Value" に先ほどコピーした "Internal Database URL"を貼り付け
+　・もう一度 "Add Environment Variable" をクリック
+　　・"Key"に *"NODE_ENV"*を入力
+　　・"Value" に *"production"* と入力
+　【補足】knex（knex.js, knexfile.js） を "production mode" で動かすための設定
+ "Save Changes" をクリック
+
+ ### デプロイ Deploy
+renderダッシュポードから所定のWebサービスを選択、"Manual Deploy" "Deploy latest commit" をクリック
+しばらく待つ（built ~ deploy）と "url" が発行される
+
+[Sarai Pinao Lesson](https://two30608sar-solo.onrender.com)
+
+
 
 **_以下は React の Readme を転記_**
 
-# 3.Getting_Started_withCreateReactApp
+# 4.Getting_Started_withCreateReactApp
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -396,3 +457,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```

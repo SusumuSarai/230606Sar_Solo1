@@ -46,7 +46,8 @@ export const App = () => {
 
   //fetchで読み込むその3 〜 ".then"方式をリファクタ
   useEffect(() => {
-    fetch("http://localhost:8080/list")
+    // fetch("http://localhost:8080/list")
+    fetch("/list")
       .then((e) => e.json())
       .then((data) => {
         console.log("fetch_data:", data);

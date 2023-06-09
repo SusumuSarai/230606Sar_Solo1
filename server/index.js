@@ -9,6 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(pino);
 
+app.use(express.static("build"));
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   next();
